@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mariadb.jdbc.MariaDbDataSource;
 
+
 /**
  *
  * @author Mooneswar.Ramburrun
@@ -28,7 +29,7 @@ public class ConnexionMariaDB {
             String userID = "p1502985";
             String pwd = "240956";
             String URL = "jdbc:mariadb://iutdoua-web.univ-lyon1.fr/p1502985";
-            conn = (Connection) DriverManager.getConnection(URL, userID, pwd);
+            conn = (Connection) DriverManager.getConnection(URL,userID, pwd);
             return (conn);
          } catch (SQLException ex) {
             Logger.getLogger(ConnexionMariaDB.class.getName()).log(Level.SEVERE, null, ex);

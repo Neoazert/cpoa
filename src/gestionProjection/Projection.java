@@ -15,6 +15,10 @@ public class Projection {
    /** @pdOid 88f083d6-5fde-4d18-9777-d4f6c9f4382c */
    private String heure;
 
+    Projection() {
+        
+    }
+
     public void setSalle(Salle salle) {
         this.salle = salle;
     }
@@ -25,6 +29,13 @@ public class Projection {
    public Contrainte contrainte;
    /** @pdRoleInfo migr=no name=Salle assc=association4 mult=1 side=A */
    public Salle salle;
+
+    public Projection(Date date, String heure, Film film, Salle salle) {
+        this.date = date;
+        this.heure = heure;
+        this.film = film;
+        this.salle = salle;
+    }
 
     public void setDate(Date date) {
         this.date = date;
