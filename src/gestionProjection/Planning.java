@@ -8,6 +8,7 @@ package gestionProjection;
 
 import connexion.ConnexionMariaDB;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
@@ -95,113 +96,122 @@ public class Planning {
     }
 
     private void loadPlanning() {
-       //openConnection();
-       Projection proj = new Projection();
-       tabFilms = new ArrayList<>();
-       tabSalles = new ArrayList<>();
-       projection =new ArrayList<>();
-       
-       ///********************************** LOCAL DATA **********************************
-       
-       tabFilms.add(new Film(0,"LOTR","Séléction officielle","pas Tolkien",60));
-       tabFilms.add(new Film(1,"LOTR1","Séléction officielle","michel",120));
-       tabFilms.add(new Film(2,"LOTR2","Séléction officielle","beber",30));
-       tabFilms.add(new Film(3,"LOTR3","Séléction officielle","bonbeur",60));
-       
-       tabSalles.add(new Salle(0,"salle propre"));
-       tabSalles.add(new Salle(0,"salle sale"));
-       
-       projection.add(new Projection(new Date(2017, 9, 1), "20h30", tabFilms.get(0), tabSalles.get(0)));
-       
-       
-       
-       ///********************************** LOCAL DATA **********************************
-       
-       
-       
-       /*
-       boolean continuer = true;
        try {
-           java.sql.Statement requete;
-           requete = connexion.createStatement();
-           java.sql.ResultSet ensresul;
-           ensresul = requete.executeQuery(
+           //openConnection();
+           Projection proj = new Projection();
+           tabFilms = new ArrayList<>();
+           tabSalles = new ArrayList<>();
+           projection =new ArrayList<>();
+           
+           ///********************************** LOCAL DATA **********************************
+           
+           tabFilms.add(new Film(0,"MATRIX","Séléction officielle","pas Tolkien",60));
+           tabFilms.add(new Film(1,"LOTR1","Séléction officielle","michel",120));
+           tabFilms.add(new Film(2,"FIGHT CLUB","Séléction officielle","beber",30));
+           tabFilms.add(new Film(3,"LOTR3","Séléction officielle","bonbeur",60));
+           
+           tabSalles.add(new Salle(0,"salle propre"));
+           tabSalles.add(new Salle(1,"salle sale"));
+           
+           SimpleDateFormat dateformat3 = new SimpleDateFormat("dd/MM/yyyy/hh");
+                   
+                   projection.add(new Projection( dateformat3.parse("18/09/2017/01"), "20h30", tabFilms.get(0), tabSalles.get(0)));
+                   
+                   projection.add(new Projection(dateformat3.parse("19/09/2017/01"), "09h00", tabFilms.get(1), tabSalles.get(1)));
+                   
+                   projection.add(new Projection(dateformat3.parse("27/10/2017/01"), "17h20", tabFilms.get(2), tabSalles.get(0)));
+                   
+                   
+                   
+                   ///********************************** LOCAL DATA **********************************
+                   
+                   
+                   
+                   /*
+                   boolean continuer = true;
+                   try {
+                   java.sql.Statement requete;
+                   requete = connexion.createStatement();
+                   java.sql.ResultSet ensresul;
+                   ensresul = requete.executeQuery(
                    "select * from films");
-                      
-           while (ensresul.next()){
-
-               tabFilms.add(new Film(ensresul.getInt(1), ensresul.getString(2), ensresul.getString(3), ensresul.getString(4), ensresul.getInt(5))); 
-          
-           }
-           
-           
-           Iterator<Film> filmIterator = tabFilms.iterator();
-           
-            ensresul = requete.executeQuery(
+                   
+                   while (ensresul.next()){
+                   
+                   tabFilms.add(new Film(ensresul.getInt(1), ensresul.getString(2), ensresul.getString(3), ensresul.getString(4), ensresul.getInt(5)));
+                   
+                   }
+                   
+                   
+                   Iterator<Film> filmIterator = tabFilms.iterator();
+                   
+                   ensresul = requete.executeQuery(
                    "select * from salles");
-            
-           while (ensresul.next()){
-               
-         
-               tabSalles.add(new Salle(ensresul.getInt(1), ensresul.getString(2))); 
-          
-           }
-           Iterator<Salle> salleIterator = tabSalles.iterator();
-           
-           requete = connexion.createStatement();
-           ensresul = requete.executeQuery(
+                   
+                   while (ensresul.next()){
+                   
+                   
+                   tabSalles.add(new Salle(ensresul.getInt(1), ensresul.getString(2)));
+                   
+                   }
+                   Iterator<Salle> salleIterator = tabSalles.iterator();
+                   
+                   requete = connexion.createStatement();
+                   ensresul = requete.executeQuery(
                    "select * from projections");
-           
-           
-           while (ensresul.next()) {
-               System.out.println(ensresul.getInt(1));
-               int i=0;
-               continuer = true;
-               
-               while(continuer && i<tabFilms.size()){
-     
+                   
+                   
+                   while (ensresul.next()) {
+                   System.out.println(ensresul.getInt(1));
+                   int i=0;
+                   continuer = true;
+                   
+                   while(continuer && i<tabFilms.size()){
+                   
                    if (tabFilms.get(i).getId() == ensresul.getInt(1)){
-                       continuer = false;
-                       proj.setFilm(tabFilms.get(i));
+                   continuer = false;
+                   proj.setFilm(tabFilms.get(i));
                    } 
                    i++;
                    
-               }
-               
-               continuer = true;
-               while(continuer && i<tabSalles.size()){
+                   }
+                   
+                   continuer = true;
+                   while(continuer && i<tabSalles.size()){
                    if (tabSalles.get(i).getNumeroSalle() == ensresul.getInt(4)){
-                       continuer = false;
-                       proj.setSalle(tabSalles.get(i));
+                   continuer = false;
+                   proj.setSalle(tabSalles.get(i));
                    }
                    i++;
                    
-               }
-                                 
-               proj.setDate(ensresul.getDate(2));
-               proj.setHeure(ensresul.getString(3));
-               
-               System.out.println(proj);
-               
-               projection.add(proj);     
-               
-               proj = new Projection();
-               
-               
-               //System.out.println(date + heure + idSalle);
-               
-               
-           }
-           ensresul.close();
-           requete.close();
-           
-       } catch (SQLException ex) {
+                   }
+                   
+                   proj.setDate(ensresul.getDate(2));
+                   proj.setHeure(ensresul.getString(3));
+                   
+                   System.out.println(proj);
+                   
+                   projection.add(proj);
+                   
+                   proj = new Projection();
+                   
+                   
+                   //System.out.println(date + heure + idSalle);
+                   
+                   
+                   }
+                   ensresul.close();
+                   requete.close();
+                   
+                   } catch (SQLException ex) {
+                   Logger.getLogger(Planning.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+                   
+                   closeConnection();
+                   
+       */   } catch (ParseException ex) {
            Logger.getLogger(Planning.class.getName()).log(Level.SEVERE, null, ex);
        }
-       
-       closeConnection();
-       
-  */
     }
     
     
