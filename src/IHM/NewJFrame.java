@@ -187,7 +187,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void buttonShowProjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowProjActionPerformed
 
-        AfficherProjection.main(planning);// TODO add your handling code here:
+        AfficherProjection.main(planning, null);// TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_buttonShowProjActionPerformed
 

@@ -115,7 +115,7 @@ public class Planning {
            
            SimpleDateFormat dateformat3 = new SimpleDateFormat("dd/MM/yyyy/hh");
                    
-                   projection.add(new Projection( dateformat3.parse("18/09/2017/01"), "20h30", tabFilms.get(0), tabSalles.get(0)));
+                   //projection.add(new Projection( dateformat3.parse("18/09/2017/01"), "20h30", tabFilms.get(0), tabSalles.get(0)));
                    
                    projection.add(new Projection(dateformat3.parse("19/09/2017/01"), "09h00", tabFilms.get(1), tabSalles.get(1)));
                    
@@ -233,6 +233,29 @@ public class Planning {
     
     public ArrayList<Salle> getSalles(){
         return tabSalles;
+    }
+    
+    
+        public Film getFilmNamed(String name){
+        Film ret = null;
+        for(int i=0; i<tabFilms.size(); i++){
+            if(tabFilms.get(i).getNomFilm().equals(name))
+                ret = tabFilms.get(i);
+        }
+        
+        return ret;
+    }
+    
+    
+    
+    public Salle getSalleNamed(String name){
+        Salle ret = null;
+        for(int i=0; i<tabSalles.size(); i++){
+            if(tabSalles.get(i).getNomSalle().equals(name))
+                ret = tabSalles.get(i);
+        }
+        
+        return ret;
     }
 
 

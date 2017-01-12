@@ -117,7 +117,7 @@ public class choix extends javax.swing.JFrame {
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
 
         
-        AfficherProjection.main(planning);// TODO add your handling code here:
+        AfficherProjection.main(planning,  planning.getFilmNamed(jList2.getSelectedValue()));// TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jList2MouseClicked
 
