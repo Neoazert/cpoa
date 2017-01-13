@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,6 +29,7 @@ public class AfficherProjection extends javax.swing.JFrame {
      */
     public AfficherProjection( Planning planning, Film film) {
         initComponents();
+        jButton1.setVisible(false);
         this.planning = planning;
         this.film = film;
         ArrayList<Salle> salles = planning.getSalles();
@@ -92,6 +94,7 @@ public class AfficherProjection extends javax.swing.JFrame {
     
     public void showProj(){
         
+        jButton1.setVisible(false);
         Date max =  new Date();
         max.setMonth(actualDate.getMonth());
         max.setYear(actualDate.getYear());
@@ -211,6 +214,8 @@ private void caseDispo(){
         }
     }
 
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -230,7 +235,12 @@ private void caseDispo(){
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Ajouter Projection...");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -385,10 +395,23 @@ private void caseDispo(){
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        if(film != null && jTable1.getModel().getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()) == null)
-        {    
-            int h = (8+(jTable1.getSelectedRow())/2);
+        if(film != null && jTable1.getModel().getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()) == null)  
+            jButton1.setVisible(true);
+        else
+            jButton1.setVisible(false);
+
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseEntered
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                
+        int h = (8+(jTable1.getSelectedRow())/2);
             String heureDebut = "";
+            
+            
             if (h < 10)
                 heureDebut += "0";
             
@@ -399,21 +422,22 @@ private void caseDispo(){
             else
                 heureDebut += "00";
             
+            
+            
             Date date = new Date(actualDate.getYear(), actualDate.getMonth(), actualDate.getDate(), actualDate.getHours(), actualDate.getMinutes(), actualDate.getSeconds());
             date.setDate(date.getDate()+jTable1.getSelectedColumn()-1);
             
-            //System.out.println(date.getDay());
+            String message = "Etes-vous sûr de vouloir ajouter une projection de " + film.getNomFilm() + 
+                    " dans la salle '"+ jComboBox1.getSelectedItem() + "' le " + date.getDate() + "/" + date.getMonth() + " " + " à partir de " + heureDebut + " ?";
+            int choix = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_OPTION);
+            
+            if (choix == 0)
+                planning.addProjection(new Projection(date, heureDebut, film, planning.getSalleNamed(jComboBox1.getSelectedItem().toString())));
             
             
-            planning.addProjection(new Projection(date, heureDebut, film, planning.getSalleNamed(jComboBox1.getSelectedItem().toString())));
                
-            showProj();       
-        }
-    }//GEN-LAST:event_jTable1MouseClicked
-
-    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseEntered
+            showProj();      
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
