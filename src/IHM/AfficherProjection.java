@@ -30,7 +30,7 @@ public class AfficherProjection extends javax.swing.JFrame {
      */
     public AfficherProjection( Planning planning, Film film) {
         initComponents();
-        jButton1.setVisible(false);
+        jButton1.setEnabled(false);
         this.planning = planning;
         this.film = film;
         ArrayList<Salle> salles = planning.getSalles();
@@ -96,7 +96,8 @@ public class AfficherProjection extends javax.swing.JFrame {
     public void showProj(){
         
 
-        jButton1.setVisible(false);
+        jButton1.setEnabled(false);
+        
 
         for(int i=0;i<7;i++)
             nbFilmOfJour[i]=0;
@@ -127,7 +128,7 @@ public class AfficherProjection extends javax.swing.JFrame {
             
             
             
-            
+            System.out.print(jComboBox1.getSelectedItem()== planning.getProjection().get(i).getSalle().getNomSalle());
             
             
             if(jComboBox1.getSelectedItem()== planning.getProjection().get(i).getSalle().getNomSalle() //sale
@@ -136,7 +137,7 @@ public class AfficherProjection extends javax.swing.JFrame {
                     //Contrainte ******
                     if(planning.getProjection().get(i).getFilm().getConcours().equals("Séléction officielle")){
                         nbFilmOfJour[planning.getProjection().get(i).getDate().getDay()] +=1;
-                        System.out.print("aeazeazezaezae");
+                        //System.out.print("aeazeazezaezae");
                     }
                     //Contrainte ******
                     
@@ -157,7 +158,7 @@ public class AfficherProjection extends javax.swing.JFrame {
                     if(a==0)
                         a=7;
                     
-                    System.out.println(a);
+                    //System.out.println(a);
                     //System.out.println(planning.getProjection().get(i).getDate().getDay());
                     
                     int nbCase = planning.getProjection().get(i).getFilm().getDuree()/30;
@@ -368,11 +369,11 @@ private void caseDispo(){
                     .addComponent(jButton2)
                     .addGap(54, 54, 54)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(44, 44, 44)
+                    .addGap(18, 18, 18)
                     .addComponent(jButton3)
-                    .addGap(61, 61, 61)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(74, 74, 74))))
+                    .addGap(34, 34, 34)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(33, 33, 33))))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,9 +431,9 @@ private void caseDispo(){
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         if(film != null && jTable1.getModel().getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()) == null)  
-            jButton1.setVisible(true);
+            jButton1.setEnabled(true);
         else
-            jButton1.setVisible(false);
+            jButton1.setEnabled(false);
 
     }//GEN-LAST:event_jTable1MouseClicked
 
