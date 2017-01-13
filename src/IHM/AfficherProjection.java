@@ -95,14 +95,13 @@ public class AfficherProjection extends javax.swing.JFrame {
     
     public void showProj(){
         
-<<<<<<< HEAD
+
         jButton1.setVisible(false);
-=======
+
         for(int i=0;i<7;i++)
             nbFilmOfJour[i]=0;
             
         
->>>>>>> 8524a7a6f4be41e135205e62214d62613eaa6f05
         Date max =  new Date();
         max.setMonth(actualDate.getMonth());
         max.setYear(actualDate.getYear());
@@ -437,9 +436,9 @@ private void caseDispo(){
 
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
+    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {                                     
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseEntered
+    }                                    
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                 
@@ -469,18 +468,15 @@ private void caseDispo(){
             if (choix == 0)
                 planning.addProjection(new Projection(date, heureDebut, film, planning.getSalleNamed(jComboBox1.getSelectedItem().toString())));
             
-<<<<<<< HEAD
+
             
                
             showProj();      
     }//GEN-LAST:event_jButton1ActionPerformed
-=======
-            planning.addProjection(new Projection(date, heureDebut, film, planning.getSalleNamed(jComboBox1.getSelectedItem().toString())));
-               
-            showProj();       
-        }
+
      
-    }//GEN-LAST:event_jTable1MouseClicked
+
+                                       
     
     private String getDayOfWeek(int value){
         String day = "";
@@ -509,11 +505,11 @@ private void caseDispo(){
             }
             return day;
     }
-    
+ /*   
     private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseEntered
->>>>>>> 8524a7a6f4be41e135205e62214d62613eaa6f05
+*/
 
     /**
      * @param args the command line arguments
