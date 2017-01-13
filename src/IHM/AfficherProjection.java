@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 public class AfficherProjection extends javax.swing.JFrame {
     
     Date actualDate ;
+    int nbFilmOfJour[] = {0,0,0,0,0,0,0}; 
     /**
      * Creates new form AfficherProjection
      */
@@ -94,7 +95,14 @@ public class AfficherProjection extends javax.swing.JFrame {
     
     public void showProj(){
         
+<<<<<<< HEAD
         jButton1.setVisible(false);
+=======
+        for(int i=0;i<7;i++)
+            nbFilmOfJour[i]=0;
+            
+        
+>>>>>>> 8524a7a6f4be41e135205e62214d62613eaa6f05
         Date max =  new Date();
         max.setMonth(actualDate.getMonth());
         max.setYear(actualDate.getYear());
@@ -125,7 +133,14 @@ public class AfficherProjection extends javax.swing.JFrame {
             
             if(jComboBox1.getSelectedItem()== planning.getProjection().get(i).getSalle().getNomSalle() //sale
                     && planning.getProjection().get(i).getDate().compareTo(actualDate) >= 0 && planning.getProjection().get(i).getDate().compareTo(max) <=0 /*semaine*/ ){
-                
+                    
+                    //Contrainte ******
+                    if(planning.getProjection().get(i).getFilm().getConcours().equals("Séléction officielle")){
+                        nbFilmOfJour[planning.getProjection().get(i).getDate().getDay()] +=1;
+                        System.out.print("aeazeazezaezae");
+                    }
+                    //Contrainte ******
+                    
                     String str = Character.toString(planning.getProjection().get(i).getHeure().charAt(0)) + Character.toString(planning.getProjection().get(i).getHeure().charAt(1));
                     int heure = Integer.parseInt(str); 
                     
@@ -162,6 +177,14 @@ public class AfficherProjection extends javax.swing.JFrame {
             }
             
         }
+        jLabel2.setText("<html>");
+        for(int i=0;i<7;i++){
+            if(nbFilmOfJour[i] <2){
+                jLabel2.setText(jLabel2.getText() + "Atention : il y a moin de 2 films offciel le "  + getDayOfWeek(i) + "<br><br>");
+                
+            } 
+        }
+        jLabel2.setText(jLabel2.getText() + "</html>");
         
         if(film != null)
            caseDispo();
@@ -232,6 +255,7 @@ private void caseDispo(){
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -322,7 +346,10 @@ private void caseDispo(){
         }
     });
 
-    jLabel1.setText("-");
+    jLabel1.setText("-----------------------------------------------------------------");
+
+    jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+    jLabel2.setText("jLabel2");
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -333,14 +360,16 @@ private void caseDispo(){
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 961, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(26, 26, 26)
+                    .addComponent(jLabel2)
+                    .addContainerGap(186, Short.MAX_VALUE))
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(53, 53, 53)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                    .addGap(54, 54, 54)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
+                    .addGap(44, 44, 44)
                     .addComponent(jButton3)
                     .addGap(61, 61, 61)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -349,9 +378,15 @@ private void caseDispo(){
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
-            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+                    .addGap(18, 18, 18))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(35, 35, 35)
+                    .addComponent(jLabel2)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jButton1)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -434,10 +469,51 @@ private void caseDispo(){
             if (choix == 0)
                 planning.addProjection(new Projection(date, heureDebut, film, planning.getSalleNamed(jComboBox1.getSelectedItem().toString())));
             
+<<<<<<< HEAD
             
                
             showProj();      
     }//GEN-LAST:event_jButton1ActionPerformed
+=======
+            planning.addProjection(new Projection(date, heureDebut, film, planning.getSalleNamed(jComboBox1.getSelectedItem().toString())));
+               
+            showProj();       
+        }
+     
+    }//GEN-LAST:event_jTable1MouseClicked
+    
+    private String getDayOfWeek(int value){
+        String day = "";
+        switch(value){
+            case 1:
+                day="Lundi";
+                break;
+            case 2:
+                day="Mardi";
+                break;
+            case 3:
+                day="Mercredi";
+                break;
+            case 4:
+                day="Jeudi";
+                break;
+            case 5:
+                day="Vendredi";
+                break;
+            case 6:
+                day="Samedi";
+                break;
+            case 0:
+                day="Dimanche";
+                break;
+            }
+            return day;
+    }
+    
+    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseEntered
+>>>>>>> 8524a7a6f4be41e135205e62214d62613eaa6f05
 
     /**
      * @param args the command line arguments
@@ -482,6 +558,7 @@ private void caseDispo(){
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
@@ -496,3 +573,4 @@ films dnas les dates du festival
 2 films de la compétition officielle différent projeté 2 fois / jours
 certaines compétitions dans certaines salles uniquement
 */
+
