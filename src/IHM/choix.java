@@ -20,7 +20,8 @@ public class choix extends javax.swing.JFrame {
      * Creates new form choixHoraire
      */
     ArrayList<Film> films;
-    public choix(Planning planning, String concours) {
+    public choix(Planning planning, String concours,NewJFrame frame) {
+        this.frame = frame;
         initComponents();
         this.planning = planning;
         this.concours = concours;
@@ -111,7 +112,8 @@ public class choix extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+         frame.setVisible(true);
+         dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
@@ -120,11 +122,11 @@ public class choix extends javax.swing.JFrame {
         AfficherProjection.main(planning,  planning.getFilmNamed(jList2.getSelectedValue()));// TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jList2MouseClicked
-
+    public static NewJFrame  frame;
     /**
      * @param args the command line arguments
      */
-    public static void main(String concours, Planning planning) {
+    public static void main(String concours, Planning planning,NewJFrame frame) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -149,10 +151,11 @@ public class choix extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new choix(planning,concours).setVisible(true);
+                new choix(planning,concours,frame).setVisible(true);
             }
         });
     }

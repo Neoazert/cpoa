@@ -196,7 +196,7 @@ public class NewJFrame extends javax.swing.JFrame {
          
         String concours =comboCompet.getSelectedItem().toString();
         
-        choix.main(concours, planning);
+        choix.main(concours, planning,this);
         setVisible(false);
     }//GEN-LAST:event_buttonNewProjActionPerformed
 

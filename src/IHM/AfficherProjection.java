@@ -180,7 +180,7 @@ public class AfficherProjection extends javax.swing.JFrame {
         jLabel2.setText("<html>");
         for(int i=0;i<7;i++){
             if(nbFilmOfJour[i] <2){
-                jLabel2.setText(jLabel2.getText() + "Atention : il y a moin de 2 films offciel le "  + getDayOfWeek(i) + "<br><br>");
+                jLabel2.setText(jLabel2.getText() + "Attention : il y'a moins de 2 films officiels le "  + getDayOfWeek(i) + "<br><br>");
                 
             } 
         }
